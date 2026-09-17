@@ -1,0 +1,228 @@
+@import "tailwindcss";
+@custom-variant hover (&:hover);
+
+@theme {
+  --font-league-spartan: "League Spartan", sans-serif;
+
+  --color-navy-850: #3a4663;
+  --color-navy-900: #242d44;
+  --color-navy-950: #181f33;
+  --color-navy-700: #647198;
+  --color-navy-800: #414e73;
+  --color-red-600: #d03f2f;
+  --color-red-800: #93261a;
+  --color-gray-200: #eae3dc;
+  --color-gray-orange-400: #b3a497;
+  --color-navy-750: #434a59;
+  --color-white: #ffffff;
+
+  --color-gray-100: #eeeeee;
+  --color-gray-300: #d2cdcd;
+  --color-blue-500: #378187;
+  --color-blue-600: #1b6066;
+  --color-orange-700: #c85402;
+  --color-orange-800: #873901;
+  --color-gray-200-t2: #e5e4e1;
+  --color-gray-orange-450: #a79e91;
+  --color-gray-900: #36362c;
+
+  --color-purple-950: #170d21;
+  --color-purple-900: #1e0936;
+  --color-purple-800: #331c4d;
+  --color-purple-400: #863cba;
+  --color-cyan-500: #00ded0;
+  --color-cyan-400: #94fff9;
+  --color-purple-850: #341c4f;
+  --color-purple-750: #8731ab;
+  --color-yellow-300: #ffe53d;
+  --color-blue-950: #1a2327;
+
+  --shadow-key-navy: 0 0.4rem 0 0 var(--color-navy-800);
+  --shadow-key-red: 0 0.4rem 0 0 var(--color-red-800);
+  --shadow-key-gray: 0 0.4rem 0 0 var(--color-gray-orange-400);
+  --shadow-key-blue: 0 0.4rem 0 0 var(--color-blue-600);
+  --shadow-key-orange: 0 0.4rem 0 0 var(--color-orange-800);
+  --shadow-key-gray-t2: 0 0.4rem 0 0 var(--color-gray-orange-450);
+  --shadow-key-purple: 0 0.4rem 0 0 var(--color-purple-750);
+  --shadow-key-purple-deep: 0 0.4rem 0 0 var(--color-purple-400);
+  --shadow-key-cyan: 0 0.4rem 0 0 var(--color-cyan-400);
+}
+
+@layer base {
+  html {
+    font-size: 62.5%;
+  }
+
+  body {
+    @apply flex min-h-screen items-center justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
+  }
+
+  body:has(.calculator[data-theme="2"]) {
+    @apply bg-gray-200-t2;
+  }
+
+  body:has(.calculator[data-theme="3"]) {
+    @apply bg-purple-950;
+  }
+}
+
+@layer components {
+  .calculator {
+    @apply flex w-full max-w-[32.7rem] flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
+  }
+
+  .calculator__header {
+    @apply mb-[2.4rem] flex items-end justify-between sm:mb-[2.8rem] lg:mb-[3.2rem];
+  }
+
+  .calculator__logo {
+    @apply text-[2rem] leading-none text-white sm:text-[2.8rem] lg:text-[3.2rem];
+  }
+
+  .calculator__theme-switcher {
+    @apply flex items-end gap-[2.2rem] sm:gap-[2.4rem] lg:gap-[2.6rem];
+  }
+
+  .calculator__theme-label {
+    @apply text-[1.1rem] tracking-[0.1rem] text-white sm:text-[1.2rem];
+  }
+
+  .theme-toggle {
+    @apply relative flex h-[2.4rem] w-[6.4rem] cursor-pointer items-center justify-between rounded-full bg-navy-900 px-[0.5rem] sm:h-[2.6rem] sm:w-[7.1rem];
+  }
+
+  .theme-toggle__number {
+    @apply z-10 w-[1.4rem] text-center text-[1.1rem] text-white sm:w-[1.6rem] sm:text-[1.2rem] opacity-0;
+  }
+
+  .theme-toggle__slider {
+    @apply absolute left-[0.5rem] top-[0.5rem] h-[1.4rem] w-[1.4rem] rounded-full bg-red-600 transition-transform duration-300 sm:h-[1.6rem] sm:w-[1.6rem];
+  }
+
+  .calculator__screen {
+    @apply mb-[2rem] flex h-[7rem] items-center justify-end overflow-hidden rounded-[1rem] bg-navy-950 px-[2rem] sm:mb-[2.4rem] sm:h-[8rem] sm:px-[2.4rem] lg:h-[10rem] lg:px-[3.2rem];
+  }
+
+  .calculator__screen-text {
+    @apply overflow-hidden text-[3.2rem] leading-none text-white sm:text-[4rem] lg:text-[4.8rem];
+  }
+
+  .calculator__keypad {
+    @apply grid grid-cols-4 gap-[1rem] rounded-[1rem] bg-navy-900 p-[1.8rem] sm:gap-[1.3rem] sm:p-[2.4rem] lg:gap-[1rem] lg:p-[3rem];
+  }
+
+  .key {
+    @apply flex h-[5rem] cursor-pointer items-center justify-center rounded-[0.5rem] text-[2.6rem] leading-none transition-all duration-150 active:translate-y-[0.2rem] hover:opacity-50 active:shadow-none sm:h-[5.8rem] sm:text-[3rem] lg:h-[6rem] lg:text-[3rem];
+  }
+
+  .key--number {
+    @apply bg-gray-200 text-navy-750 shadow-key-gray;
+  }
+
+  .key--function {
+    @apply bg-navy-700 text-white shadow-key-navy;
+  }
+
+  .key--equals {
+    @apply col-span-2 bg-red-600 text-white shadow-key-red;
+  }
+
+  .key--reset {
+    @apply col-span-2;
+  }
+
+  .key--del {
+    @apply text-[1.4rem] tracking-[0.1rem] sm:text-[1.6rem] lg:text-[2rem];
+  }
+
+  .calculator[data-theme="1"] {
+    @apply bg-navy-850;
+  }
+
+  .calculator[data-theme="2"] {
+    @apply bg-gray-200-t2;
+  }
+
+  .calculator[data-theme="2"] .calculator__logo,
+  .calculator[data-theme="2"] .calculator__theme-label,
+  .calculator[data-theme="2"] .theme-toggle__number {
+    @apply text-gray-900;
+  }
+
+  .calculator[data-theme="2"] .theme-toggle {
+    @apply bg-gray-300;
+  }
+
+  .calculator[data-theme="2"] .theme-toggle__slider {
+    @apply translate-x-[2rem] bg-orange-700 sm:translate-x-[2.25rem];
+  }
+
+  .calculator[data-theme="2"] .calculator__screen {
+    @apply bg-gray-100;
+  }
+
+  .calculator[data-theme="2"] .calculator__screen-text {
+    @apply text-gray-900;
+  }
+
+  .calculator[data-theme="2"] .calculator__keypad {
+    @apply bg-gray-300;
+  }
+
+  .calculator[data-theme="2"] .key--number {
+    @apply bg-gray-200-t2 text-gray-900 shadow-key-gray-t2;
+  }
+
+  .calculator[data-theme="2"] .key--function {
+    @apply bg-blue-500 text-white shadow-key-blue;
+  }
+
+  .calculator[data-theme="2"] .key--equals {
+    @apply bg-orange-700 text-white shadow-key-orange;
+  }
+
+  .calculator[data-theme="3"] {
+    @apply bg-purple-950;
+  }
+
+  .calculator[data-theme="3"] .calculator__logo,
+  .calculator[data-theme="3"] .calculator__theme-label,
+  .calculator[data-theme="3"] .theme-toggle__number {
+    @apply text-yellow-300;
+  }
+
+  .calculator[data-theme="3"] .theme-toggle {
+    @apply bg-purple-900;
+  }
+
+  .calculator[data-theme="3"] .theme-toggle__slider {
+    @apply translate-x-[4rem] bg-cyan-500 sm:translate-x-[4.5rem];
+  }
+
+  .calculator[data-theme="3"] .calculator__screen {
+    @apply bg-purple-900;
+  }
+
+  .calculator[data-theme="3"] .calculator__screen-text {
+    @apply text-yellow-300;
+  }
+
+  .calculator[data-theme="3"] .calculator__keypad {
+    @apply bg-purple-900;
+  }
+
+  .calculator[data-theme="3"] .key--number {
+    @apply bg-purple-850 text-yellow-300 shadow-key-purple;
+  }
+
+  .calculator[data-theme="3"] .key--function {
+    @apply bg-purple-800 text-white shadow-key-purple-deep;
+  }
+
+  .calculator[data-theme="3"] .key--equals {
+    @apply bg-cyan-500 text-blue-950 shadow-key-cyan;
+  }
+}
+
+@layer utilities {
+}
