@@ -49,20 +49,79 @@
     font-size: 62.5%;
   }
   body {
-    @apply flex min-h-screen items-center justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
+    @apply flex flex-col  min-h-screen items-center justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
+  }
+
+  ::-webkit-scrollbar {
+    @apply h-[0.6rem] w-[0.6rem];
+  }
+  ::-webkit-scrollbar-track {
+    @apply rounded-full bg-navy-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-white;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/50;
+  }
+  .attribution {
+    @apply relative text-center text-[1.1rem] font-medium text-white transition-colors duration-300 hidden md:block bottom-5;
+  }
+  .attribution a {
+    @apply font-bold text-red-600 underline-offset-2 transition-colors duration-300 hover:underline;
+  }
+  body:has(.calculator[data-theme="2"]) .attribution {
+    @apply text-gray-900;
+  }
+  body:has(.calculator[data-theme="2"]) .attribution a {
+    @apply text-orange-700;
+  }
+  body:has(.calculator[data-theme="3"]) .attribution {
+    @apply text-yellow-300;
+  }
+  body:has(.calculator[data-theme="3"]) .attribution a {
+    @apply text-cyan-500;
+  }
+  body ::selection {
+    @apply bg-red-600 text-white;
   }
   body:has(.calculator[data-theme="2"]) {
     @apply bg-gray-200-t2;
   }
+  body:has(.calculator[data-theme="2"]) ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  body:has(.calculator[data-theme="2"]) ::-webkit-scrollbar-thumb {
+    @apply bg-orange-700;
+  }
+  body:has(.calculator[data-theme="2"]) ::-webkit-scrollbar-thumb:hover {
+    @apply bg-orange-800;
+  }
+  body:has(.calculator[data-theme="2"]) ::selection {
+    @apply bg-orange-700 text-white;
+  }
   body:has(.calculator[data-theme="3"]) {
     @apply bg-purple-950;
+  }
+  body:has(.calculator[data-theme="3"]) ::-webkit-scrollbar-track {
+    @apply bg-purple-900;
+  }
+  body:has(.calculator[data-theme="3"]) ::-webkit-scrollbar-thumb {
+    @apply bg-cyan-500;
+  }
+  body:has(.calculator[data-theme="3"]) ::-webkit-scrollbar-thumb:hover {
+    @apply bg-cyan-400;
+  }
+  body:has(.calculator[data-theme="3"]) ::selection {
+    @apply bg-cyan-500 text-blue-950;
   }
 }
 
 @layer components {
   .calculator {
-    @apply flex w-full max-w-[32.7rem] flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
+    @apply flex  w-full max-w-[32.7rem] flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
   }
+
   .calculator__header {
     @apply mb-[2.4rem] flex items-end justify-between sm:mb-[2.8rem] lg:mb-[3.2rem];
   }
@@ -85,13 +144,15 @@
     @apply absolute left-[0.5rem] top-[0.5rem] h-[1.4rem] w-[1.4rem] rounded-full bg-red-600 transition-transform duration-300 sm:h-[1.6rem] sm:w-[1.6rem];
   }
   .calculator__screen {
-    @apply mb-[2rem] flex h-[7rem] gap-2 items-center justify-end overflow-auto rounded-[1rem] bg-navy-950 px-[2rem] sm:mb-[2.4rem] sm:h-[8rem] sm:px-[2.4rem] lg:h-[10rem] lg:px-[3.2rem];
+    @apply mb-[2rem] flex gap-2 h-[7rem] items-center justify-end overflow-x-auto overflow-y-hidden rounded-[1rem] bg-navy-950 px-[2rem] sm:mb-[2.4rem] sm:h-[8rem] sm:px-[2.4rem] lg:h-[10rem] lg:px-[3.2rem];
   }
+
   .calculator__screen-text {
-    @apply text-[3.2rem] leading-none text-white sm:text-[4rem] lg:text-[4.8rem];
+    @apply shrink-0 whitespace-nowrap text-[3.2rem] leading-none text-white sm:text-[4rem] lg:text-[4.8rem];
   }
+
   .calculator__screen-text-operators {
-    @apply text-[2.5rem] leading-none text-white sm:text-[3rem];
+    @apply shrink-0 whitespace-nowrap text-[2.5rem] leading-none text-white sm:text-[3rem];
   }
   .calculator__keypad {
     @apply grid grid-cols-4 gap-[1rem] rounded-[1rem] bg-navy-900 p-[1.8rem] sm:gap-[1.3rem] sm:p-[2.4rem] lg:gap-[1rem] lg:p-[3rem];
@@ -186,5 +247,13 @@
     .key--equals {
       @apply bg-cyan-500 text-blue-950 shadow-key-cyan;
     }
+  }
+  .animate-mark {
+    animation: animate-mark 0.2s;
+  }
+}
+@keyframes animate-mark {
+  to {
+    opacity: 0.6;
   }
 }

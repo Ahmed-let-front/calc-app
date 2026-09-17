@@ -67,18 +67,24 @@ const returnExp = () => {
   return arrRes.join("");
 };
 const equalOperation = (key) => {
-  if (key !== "=") return;
+  if (key !== "=" && key !== "Enter") return;
   const result = eval(returnExp());
   const finalRes = Number(result.toFixed(10));
   clearScreen();
   renderOnScreen(finalRes);
 };
 const delOperation = (key) => {
-  if (key !== "del") return;
+  if (key !== "del" && key !== "Backspace") return;
   const nums = Array.from(elements.calculatorScreen.children);
   const lastEl = elements.calculatorScreen.lastElementChild;
-  if (elements.operators.includes(lastEl.textContent)) return;
-  if (lastEl.textContent.length === 1 && nums.length === 1) return;
+  if (lastEl.textContent.length === 1 && nums.length === 1) clearScreen();
+  if (
+    elements.operators.includes(lastEl.textContent) ||
+    lastEl.textContent.length === 1
+  ) {
+    lastEl.remove();
+    return;
+  }
   lastEl.textContent = lastEl.textContent.slice(
     0,
     lastEl.textContent.length - 1,
@@ -95,7 +101,6 @@ const handleKeyDelegation = (e) => {
   };
   if (lookupKeys[key]) lookupKeys[key](key);
   else renderOnScreen(key);
-  console.log(key);
 };
 const handleDocumentClick = () => {
   document.addEventListener("click", (e) => {
@@ -103,8 +108,35 @@ const handleDocumentClick = () => {
     handleKeyDelegation(e);
   });
 };
+const hoverOnEl = (key) => {
+  if (key === "Enter") key = "=";
+  if (key === "Backspace") key = "del";
+  const btn = document.querySelector(`[data-num="${key}"]`);
+  btn.classList.add("animate-mark");
+  setTimeout(() => {
+    btn.classList.remove("animate-mark");
+  }, 200);
+};
+const handleKeyPress = () => {
+  document.addEventListener("keydown", (e) => {
+    const key = e.key;
+    console.log(key);
+    const regex = /[0-9.]+|[\+\-\=\/x*]|Backspace|Enter/;
+    if (!regex.test(key)) return;
+    const lookupKeys = {
+      "=": equalOperation,
+      Enter: equalOperation,
+      Backspace: delOperation,
+      reset: clearScreen,
+    };
+    if (lookupKeys[key]) lookupKeys[key](key);
+    else renderOnScreen(key);
+    hoverOnEl(key);
+  });
+};
 const init = () => {
   setTheme();
   handleDocumentClick();
+  handleKeyPress();
 };
 init();
