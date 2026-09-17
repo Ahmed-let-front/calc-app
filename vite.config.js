@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   plugins: [tailwindcss()],
-  base: "/calc-app/",
+  // base: "/calc-app/",
   build: {
     sourcemap: false,
     rollupOptions: {

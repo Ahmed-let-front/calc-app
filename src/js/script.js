@@ -1,3 +1,4 @@
+import { parse, eval as evaluateExpression } from "expression-eval";
 const elements = {
   app: document.querySelector("main"),
   calculatorScreen: document.querySelector(".calculator__screen"),
@@ -68,7 +69,8 @@ const returnExp = () => {
 };
 const equalOperation = (key) => {
   if (key !== "=" && key !== "Enter") return;
-  const result = eval(returnExp());
+  const ast = parse(returnExp());
+  const result = evaluateExpression(ast);
   const finalRes = Number(result.toFixed(10));
   clearScreen();
   renderOnScreen(finalRes);
