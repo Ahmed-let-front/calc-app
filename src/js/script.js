@@ -11,6 +11,11 @@ const ToggleTheme = (e) => {
   elements.app.setAttribute("data-theme", theme);
 };
 const renderOnScreen = (key) => {
+  const regex = /[0-9]/;
+  if (elements.calculatorScreenText.textContent.at(-1) === "." && key === ".")
+    return;
+  if (elements.calculatorScreenText.textContent === "0" && regex.test(key))
+    clearScreen();
   elements.calculatorScreenText.textContent += key;
 };
 const clearScreen = () => {
