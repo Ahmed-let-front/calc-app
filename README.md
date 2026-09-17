@@ -13,6 +13,10 @@ Welcome to the **Calculator App**, a modern, highly responsive, and robust web c
 - **Live Demo URL:** [https://ahmed-let-front.github.io/calc-app/](https://ahmed-let-front.github.io/calc-app/)
 - **Frontend Mentor Solution:** [https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29](https://www.frontendmentor.io/challenges/calculator-app-9lteq5N29)
 
+## Lighthouse Performance Audit
+
+![Lighthouse 400/400 Score](public/lighthouse.png)
+
 ## AI Collaboration
 
 - 🤖 **UI & Layout Assistance:** AI collaboration was utilized exclusively to assist with structuring and refining the user interface (UI) and layout architecture. All core calculation logic and programming were independently engineered and implemented by the author.
