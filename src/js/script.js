@@ -2,6 +2,21 @@ const elements = {
   app: document.querySelector("main"),
   calculatorScreen: document.querySelector(".calculator__screen"),
   operators: ["+", "-", "/", "x"],
+  theme: 0,
+};
+const storeThemeLocalStorage = (newVal) => {
+  localStorage.setItem("theme", newVal.toString());
+};
+const getThemeLocalStorage = () => {
+  const newTheme = localStorage.getItem("theme");
+  if (!newTheme) return;
+  elements.theme = newTheme;
+};
+const setTheme = () => {
+  getThemeLocalStorage();
+  const lastTheme = elements.app.getAttribute("data-theme");
+  if (elements.theme === lastTheme) return;
+  elements.app.setAttribute("data-theme", elements.theme);
 };
 const ToggleTheme = (e) => {
   const targetEl = e.target.closest(".theme-toggle__number");
@@ -9,6 +24,7 @@ const ToggleTheme = (e) => {
   const theme = targetEl.dataset.theme;
   const lastTheme = elements.app.getAttribute("data-theme");
   if (lastTheme === theme) return;
+  storeThemeLocalStorage(theme);
   elements.app.setAttribute("data-theme", theme);
 };
 const renderOnScreen = (key) => {
@@ -59,9 +75,10 @@ const equalOperation = (key) => {
 };
 const delOperation = (key) => {
   if (key !== "del") return;
+  const nums = Array.from(elements.calculatorScreen.children);
   const lastEl = elements.calculatorScreen.lastElementChild;
   if (elements.operators.includes(lastEl.textContent)) return;
-  if (lastEl.textContent.length === 1) return;
+  if (lastEl.textContent.length === 1 && nums.length === 1) return;
   lastEl.textContent = lastEl.textContent.slice(
     0,
     lastEl.textContent.length - 1,
@@ -87,6 +104,7 @@ const handleDocumentClick = () => {
   });
 };
 const init = () => {
+  setTheme();
   handleDocumentClick();
 };
 init();
