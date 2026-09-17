@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/calc-app/images/favicon-32x32.png" />
+    <meta name="description" content="calc app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>calculator-app</title>
+    <script type="module" crossorigin src="/calc-app/assets/index-CQiQqo8k.js"></script>
+    <link rel="stylesheet" crossorigin href="/calc-app/assets/index-BdDIGsMG.css">
+  </head>
+  <body>
+    <main class="calculator" data-theme="1">
+      <header class="calculator__header">
+        <h1 class="calculator__logo">calc</h1>
+        <div class="calculator__theme-switcher">
+          <span class="calculator__theme-label">THEME</span>
+          <div class="theme-toggle">
+            <span class="theme-toggle__number" data-theme="1" aria-hidden="true"
+              >1</span
+            >
+            <span class="theme-toggle__number" data-theme="2" aria-hidden="true"
+              >2</span
+            >
+            <span class="theme-toggle__number" data-theme="3" aria-hidden="true"
+              >3</span
+            >
+            <div
+              class="flex items-center absolute w-full left-0 justify-between -top-7"
+            >
+              <span class="theme-toggle__number opacity-100" data-theme="1"
+                >1</span
+              >
+              <span class="theme-toggle__number opacity-100" data-theme="2"
+                >2</span
+              >
+              <span class="theme-toggle__number opacity-100" data-theme="3"
+                >3</span
+              >
+            </div>
+            <div class="theme-toggle__slider"></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="calculator__screen">
+        <span class="calculator__screen-text">0</span>
+      </div>
+
+      <div class="calculator__keypad">
+        <button class="key key--number" data-num="7">7</button>
+        <button class="key key--number" data-num="8">8</button>
+        <button class="key key--number" data-num="9">9</button>
+        <button class="key key--function key--del" data-num="del">DEL</button>
+        <button class="key key--number" data-num="4">4</button>
+        <button class="key key--number" data-num="5">5</button>
+        <button class="key key--number" data-num="6">6</button>
+        <button class="key key--function" data-num="+">+</button>
+        <button class="key key--number" data-num="1">1</button>
+        <button class="key key--number" data-num="2">2</button>
+        <button class="key key--number" data-num="3">3</button>
+        <button class="key key--function" data-num="-">-</button>
+        <button class="key key--number" data-num=".">.</button>
+        <button class="key key--number" data-num="0">0</button>
+        <button class="key key--function" data-num="/">/</button>
+        <button class="key key--function" data-num="x">x</button>
+
+        <button class="key key--function key--reset" data-num="reset">
+          RESET
+        </button>
+        <button class="key key--equals" data-num="=">=</button>
+      </div>
+    </main>
+
+    <footer class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
+      Coded by <a href="https://github.com/Ahmed-let-front">Ahmed Yasser</a>.
+    </footer>
+  </body>
+</html>
