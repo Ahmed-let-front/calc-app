@@ -1,6 +1,7 @@
 const elements = {
   app: document.querySelector("main"),
   calculatorScreen: document.querySelector(".calculator__screen"),
+  operators: ["+", "-", "/", "x"],
 };
 const ToggleTheme = (e) => {
   const targetEl = e.target.closest(".theme-toggle__number");
@@ -11,12 +12,14 @@ const ToggleTheme = (e) => {
   elements.app.setAttribute("data-theme", theme);
 };
 const renderOnScreen = (key) => {
-  console.log(key);
-  const operators = ["+", "-", "/", "x"];
   const regex = /[0-9]/;
   const lastEl = elements.calculatorScreen.lastElementChild;
   const lastText = lastEl?.textContent || "";
-  if (operators.includes(key)) {
+  if (elements.operators.includes(key)) {
+    if (elements.operators.includes(lastText)) {
+      lastEl.textContent = key;
+      return;
+    }
     const elText = `<span class="calculator__screen-text-operators">${key}</span>`;
     elements.calculatorScreen.insertAdjacentHTML("beforeend", elText);
     return;
@@ -26,7 +29,7 @@ const renderOnScreen = (key) => {
     lastEl.textContent = key;
     return;
   }
-  if (operators.includes(lastText)) {
+  if (elements.operators.includes(lastText)) {
     const elText = `<span class="calculator__screen-text">${key}</span>`;
     elements.calculatorScreen.insertAdjacentHTML("beforeend", elText);
   } else {
@@ -40,10 +43,12 @@ const clearScreen = () => {
   elements.calculatorScreen.innerHTML = `<span class="calculator__screen-text">0</span>`;
 };
 const returnExp = () => {
-  return Array.from(
-    elements.calculatorScreen.children,
-    (el) => el.textContent,
-  ).join("");
+  const arrRes = Array.from(elements.calculatorScreen.children, (el) => {
+    if (el.textContent === "x") el.textContent = "*";
+    return el.textContent;
+  });
+  if (arrRes.length === 2) arrRes.push(arrRes[0]);
+  return arrRes.join("");
 };
 const equalOperation = (key) => {
   if (key !== "=") return;
@@ -52,12 +57,24 @@ const equalOperation = (key) => {
   clearScreen();
   renderOnScreen(finalRes);
 };
+const delOperation = (key) => {
+  if (key !== "del") return;
+  const lastEl = elements.calculatorScreen.lastElementChild;
+  if (elements.operators.includes(lastEl.textContent)) return;
+  if (lastEl.textContent.length === 1) return;
+  lastEl.textContent = lastEl.textContent.slice(
+    0,
+    lastEl.textContent.length - 1,
+  );
+};
 const handleKeyDelegation = (e) => {
   const targetEl = e.target.closest(".key");
   if (!targetEl) return;
   const key = targetEl.dataset.num;
   const lookupKeys = {
     "=": equalOperation,
+    del: delOperation,
+    reset: clearScreen,
   };
   if (lookupKeys[key]) lookupKeys[key](key);
   else renderOnScreen(key);
