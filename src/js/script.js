@@ -1,6 +1,6 @@
 const elements = {
   app: document.querySelector("main"),
-  calculatorScreenText: document.querySelector(".calculator__screen-text"),
+  calculatorScreen: document.querySelector(".calculator__screen"),
 };
 const ToggleTheme = (e) => {
   const targetEl = e.target.closest(".theme-toggle__number");
@@ -11,20 +11,43 @@ const ToggleTheme = (e) => {
   elements.app.setAttribute("data-theme", theme);
 };
 const renderOnScreen = (key) => {
+  console.log(key);
+  const operators = ["+", "-", "/", "x"];
   const regex = /[0-9]/;
-  if (elements.calculatorScreenText.textContent.at(-1) === "." && key === ".")
+  const lastEl = elements.calculatorScreen.lastElementChild;
+  const lastText = lastEl?.textContent || "";
+  if (operators.includes(key)) {
+    const elText = `<span class="calculator__screen-text-operators">${key}</span>`;
+    elements.calculatorScreen.insertAdjacentHTML("beforeend", elText);
     return;
-  if (elements.calculatorScreenText.textContent === "0" && regex.test(key))
-    clearScreen();
-  elements.calculatorScreenText.textContent += key;
+  }
+  if (lastText.at(-1) === "." && key === ".") return;
+  if (lastText === "0" && regex.test(key)) {
+    lastEl.textContent = key;
+    return;
+  }
+  if (operators.includes(lastText)) {
+    const elText = `<span class="calculator__screen-text">${key}</span>`;
+    elements.calculatorScreen.insertAdjacentHTML("beforeend", elText);
+  } else {
+    lastEl.textContent += key;
+  }
 };
 const clearScreen = () => {
-  elements.calculatorScreenText.textContent = "";
+  Array.from(elements.calculatorScreen.children).forEach((el) => {
+    el.remove();
+  });
+  elements.calculatorScreen.innerHTML = `<span class="calculator__screen-text">0</span>`;
+};
+const returnExp = () => {
+  return Array.from(
+    elements.calculatorScreen.children,
+    (el) => el.textContent,
+  ).join("");
 };
 const equalOperation = (key) => {
   if (key !== "=") return;
-  console.log(elements.calculatorScreenText.textContent);
-  const result = eval(elements.calculatorScreenText.textContent);
+  const result = eval(returnExp());
   const finalRes = Number(result.toFixed(10));
   clearScreen();
   renderOnScreen(finalRes);
