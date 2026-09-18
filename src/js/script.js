@@ -109,6 +109,7 @@ const equalOperation = key => {
       default:
         return;
     }
+    if (result.toString() === 'Infinity') throw new Error('Infinity');
     clearScreen();
     renderOnScreen(result.toString());
   } catch (error) {
