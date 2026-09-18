@@ -25,13 +25,13 @@
             </div>
             <div class="theme-toggle flex items-center justify-between" role="radiogroup" aria-labelledby="theme-label">
               <label class="theme-toggle__input">
-                <input class="sr-only" type="radio" name="theme" value="1" checked />
+                <input class="sr-only" type="radio" name="theme" value="1" checked aria-label="Theme 1" />
               </label>
               <label class="theme-toggle__input">
-                <input class="sr-only" type="radio" name="theme" value="2" />
+                <input class="sr-only" type="radio" name="theme" value="2" aria-label="Theme 2" />
               </label>
               <label class="theme-toggle__input">
-                <input class="sr-only" type="radio" name="theme" value="3" />
+                <input class="sr-only" type="radio" name="theme" value="3" aria-label="Theme 3" />
               </label>
 
               <div class="theme-toggle__slider pointer-events-none"></div>
@@ -62,7 +62,7 @@
         <button class="key key--function" data-num="/" type="button">/</button>
         <button class="key key--function" data-num="x" type="button">x</button>
 
-        <button class="key key--function key--reset" data-num="reset">RESET</button>
+        <button class="key key--function key--reset" data-num="reset" type="button">RESET</button>
         <button class="key key--equals" data-num="=">=</button>
       </div>
     </main>

@@ -1,4 +1,4 @@
-import { parse, eval as evaluateExpression } from 'expression-eval';
+import Decimal from 'decimal.js';
 const elements = {
   app: document.querySelector('main'),
   calculatorScreen: document.querySelector('.calculator__screen'),
@@ -84,12 +84,37 @@ const returnExp = () => {
 const equalOperation = key => {
   if (key !== '=' && key !== 'Enter') return;
   const res = returnExp();
-  if (res.length === 1) return;
-  const ast = parse(res.join(''));
-  const result = evaluateExpression(ast);
-  const finalRes = Number(result.toFixed(10));
-  clearScreen();
-  renderOnScreen(finalRes);
+  if (res.length <= 1) return;
+  try {
+    const num1 = new Decimal(res[0]);
+    const operator = res[1];
+    const num2 = new Decimal(res[2] !== undefined ? res[2] : res[0]);
+    let result;
+    switch (operator) {
+      case '+':
+        result = num1.plus(num2);
+        break;
+      case '-':
+        result = num1.minus(num2);
+        break;
+      case '*':
+        result = num1.times(num2);
+        break;
+      case '/':
+        if (num2.isZero()) {
+          throw new Error('Division by zero');
+        }
+        result = num1.dividedBy(num2);
+        break;
+      default:
+        return;
+    }
+    clearScreen();
+    renderOnScreen(result.toString());
+  } catch (error) {
+    clearScreen();
+    renderOnScreen('Error');
+  }
 };
 const delOperation = key => {
   if (key !== 'del' && key !== 'Backspace') return;
