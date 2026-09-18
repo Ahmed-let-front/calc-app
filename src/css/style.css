@@ -119,7 +119,7 @@
 
 @layer components {
   .calculator {
-    @apply flex w-full h-[100rem] flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
+    @apply flex w-full h-full flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
   }
 
   .calculator__header {
@@ -161,7 +161,7 @@
     @apply grid grid-cols-4 gap-[1rem] rounded-[1rem] bg-navy-900 p-[1.8rem] sm:gap-[1.3rem] sm:p-[2.4rem] lg:gap-[1rem] lg:p-[3rem] h-full;
   }
   .key {
-    @apply flex h-[15rem] cursor-pointer items-center justify-center rounded-[0.5rem] text-[2.6rem] leading-none transition-all duration-150 active:translate-y-[0.2rem] hover:opacity-50 active:shadow-none sm:h-[5.8rem] sm:text-[3rem] lg:h-[6rem] lg:text-[3rem];
+    @apply flex min-h-[5rem] max-h-[15rem] cursor-pointer items-center justify-center rounded-[0.5rem] text-[2.6rem] leading-none transition-all duration-150 active:translate-y-[0.2rem] hover:opacity-50 active:shadow-none sm:h-[5.8rem] sm:text-[3rem] lg:h-[6rem] lg:text-[3rem];
   }
   .key--number {
     @apply bg-gray-200 text-navy-750 shadow-key-gray;
