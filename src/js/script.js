@@ -113,7 +113,6 @@ const equalOperation = key => {
     renderOnScreen(result.toString());
   } catch (error) {
     clearScreen();
-    renderOnScreen('Error');
   }
 };
 const delOperation = key => {
