@@ -49,7 +49,7 @@
     font-size: 62.5%;
   }
   body {
-    @apply md:flex md:flex-col  min-h-screen md:items-center md:justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
+    @apply flex flex-col  min-h-screen items-center justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
   }
 
   ::-webkit-scrollbar {
@@ -147,7 +147,7 @@
     @apply absolute left-[0.5rem] top-[0.5rem] h-[1.4rem] w-[1.4rem] rounded-full bg-red-600 transition-transform duration-300 sm:h-[1.6rem] sm:w-[1.6rem];
   }
   .calculator__screen {
-    @apply mb-[2rem] flex gap-2 h-[7rem] items-center justify-end overflow-x-auto overflow-y-hidden rounded-[1rem] bg-navy-950 px-[2rem] sm:mb-[2.4rem] sm:h-[8rem] sm:px-[2.4rem] lg:h-[10rem] lg:px-[3.2rem];
+    @apply mb-[2rem] flex gap-2 h-[10rem] items-center justify-end overflow-x-auto overflow-y-hidden rounded-[1rem] bg-navy-950 px-[2rem] sm:mb-[2.4rem] sm:h-[8rem] sm:px-[2.4rem] lg:h-[10rem] lg:px-[3.2rem];
   }
 
   .calculator__screen-text {
@@ -161,7 +161,7 @@
     @apply grid grid-cols-4 gap-[1rem] rounded-[1rem] bg-navy-900 p-[1.8rem] sm:gap-[1.3rem] sm:p-[2.4rem] lg:gap-[1rem] lg:p-[3rem] h-full;
   }
   .key {
-    @apply flex min-h-[5rem] max-h-[15rem] cursor-pointer items-center justify-center rounded-[0.5rem] text-[2.6rem] leading-none transition-all duration-150 active:translate-y-[0.2rem] hover:opacity-50 active:shadow-none sm:h-[5.8rem] sm:text-[3rem] lg:h-[6rem] lg:text-[3rem];
+    @apply flex h-[8rem] cursor-pointer items-center justify-center rounded-[0.5rem] text-[2.6rem] leading-none transition-all duration-150 active:translate-y-[0.2rem] hover:opacity-50 active:shadow-none sm:h-[5.8rem] sm:text-[3rem] lg:h-[6rem] lg:text-[3rem];
   }
   .key--number {
     @apply bg-gray-200 text-navy-750 shadow-key-gray;
