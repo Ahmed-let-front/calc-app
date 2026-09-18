@@ -121,10 +121,10 @@ const hoverOnEl = (key) => {
 };
 const handleKeyPress = () => {
   document.addEventListener("keydown", (e) => {
-    const key = e.key;
-    console.log(key);
-    const regex = /[0-9.]+|[\+\-\=\/x*]|Backspace|Enter/;
+    const key = e.key === "*" ? "x" : e.key;
+    const regex = /^([0-9.+\-\/x=]|Backspace|Enter)$/;
     if (!regex.test(key)) return;
+    if (key === "Enter") e.preventDefault();
     const lookupKeys = {
       "=": equalOperation,
       Enter: equalOperation,
