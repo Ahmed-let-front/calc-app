@@ -4,14 +4,22 @@ const elements = {
   calculatorScreen: document.querySelector('.calculator__screen'),
   operators: ['+', '-', '/', 'x'],
   theme: 0,
+  themeToggle: document.querySelector('.theme-toggle'),
 };
 const storeThemeLocalStorage = (newVal) => {
   localStorage.setItem('theme', newVal.toString());
+};
+const delAnyInputCheked = () => {
+  const inpts = document.querySelectorAll('input[name="theme"]');
+  inpts.forEach((el) => (el.checked = false));
 };
 const getThemeLocalStorage = () => {
   const newTheme = localStorage.getItem('theme');
   if (!newTheme) return;
   elements.theme = newTheme;
+  delAnyInputCheked();
+  const inputToCheck = document.querySelector(`input[name="theme"][value="${elements.theme}"]`);
+  inputToCheck.checked = true;
 };
 const setTheme = () => {
   getThemeLocalStorage();
@@ -20,10 +28,8 @@ const setTheme = () => {
   elements.app.setAttribute('data-theme', elements.theme);
 };
 const ToggleTheme = (e) => {
-  const targetEl = e.target.closest('.theme-toggle__input');
-  if (!targetEl) return;
-  const inpt = targetEl.querySelector('input');
-  const theme = inpt.value;
+  const targetEl = e.target;
+  const theme = targetEl.value;
   const lastTheme = elements.app.getAttribute('data-theme');
   if (lastTheme === theme) return;
   storeThemeLocalStorage(theme);
@@ -110,9 +116,11 @@ const handleKeyDelegation = (e) => {
 };
 const handleDocumentClick = () => {
   document.addEventListener('click', (e) => {
-    ToggleTheme(e);
     handleKeyDelegation(e);
   });
+};
+const handleTheme = () => {
+  elements.themeToggle.addEventListener('change', ToggleTheme);
 };
 const hoverOnEl = (key) => {
   if (key === 'Enter') key = '=';
@@ -144,5 +152,6 @@ const init = () => {
   setTheme();
   handleDocumentClick();
   handleKeyPress();
+  handleTheme();
 };
 init();
