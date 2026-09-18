@@ -6,41 +6,39 @@
     <meta name="description" content="calc app" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>calculator-app</title>
-    <script type="module" crossorigin src="/calc-app/assets/index-DnoLpHO9.js"></script>
+    <script type="module" crossorigin src="/calc-app/assets/index-BcGw5Tu0.js"></script>
     <link rel="modulepreload" crossorigin href="/calc-app/assets/vendor-BfdBVMIb.js">
     <link rel="stylesheet" crossorigin href="/calc-app/assets/vendor-3g5Jje9J.css">
-    <link rel="stylesheet" crossorigin href="/calc-app/assets/index-BDVsQUVl.css">
+    <link rel="stylesheet" crossorigin href="/calc-app/assets/index-D-KKq34g.css">
   </head>
   <body>
     <main class="calculator" data-theme="1">
       <header class="calculator__header">
         <h1 class="calculator__logo">calc</h1>
         <div class="calculator__theme-switcher">
-          <span class="calculator__theme-label">THEME</span>
-          <div class="theme-toggle">
-            <span class="theme-toggle__number" data-theme="1" aria-hidden="true"
-              >1</span
-            >
-            <span class="theme-toggle__number" data-theme="2" aria-hidden="true"
-              >2</span
-            >
-            <span class="theme-toggle__number" data-theme="3" aria-hidden="true"
-              >3</span
-            >
+          <span id="theme-label" class="calculator__theme-label">THEME</span>
+          <div class="relative">
             <div
-              class="flex items-center absolute w-full left-0 justify-between -top-7"
+              class="flex items-center absolute w-full left-0 justify-between -top-7 text-[1.1rem] sm:text-[1.2rem]"
+              aria-hidden="true"
             >
-              <span class="theme-toggle__number opacity-100" data-theme="1"
-                >1</span
-              >
-              <span class="theme-toggle__number opacity-100" data-theme="2"
-                >2</span
-              >
-              <span class="theme-toggle__number opacity-100" data-theme="3"
-                >3</span
-              >
+              <span class="theme-toggle__number">1</span>
+              <span class="theme-toggle__number">2</span>
+              <span class="theme-toggle__number">3</span>
             </div>
-            <div class="theme-toggle__slider"></div>
+            <div class="theme-toggle flex items-center justify-between" role="radiogroup" aria-labelledby="theme-label">
+              <label class="theme-toggle__input">
+                <input class="sr-only" type="radio" name="theme" value="1" checked />
+              </label>
+              <label class="theme-toggle__input">
+                <input class="sr-only" type="radio" name="theme" value="2" />
+              </label>
+              <label class="theme-toggle__input">
+                <input class="sr-only" type="radio" name="theme" value="3" />
+              </label>
+
+              <div class="theme-toggle__slider pointer-events-none"></div>
+            </div>
           </div>
         </div>
       </header>
@@ -67,17 +65,15 @@
         <button class="key key--function" data-num="/">/</button>
         <button class="key key--function" data-num="x">x</button>
 
-        <button class="key key--function key--reset" data-num="reset">
-          RESET
-        </button>
+        <button class="key key--function key--reset" data-num="reset">RESET</button>
         <button class="key key--equals" data-num="=">=</button>
       </div>
     </main>
 
     <footer class="attribution">
       Challenge by
-      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
-      Coded by <a href="https://github.com/Ahmed-let-front">Ahmed Yasser</a>.
+      <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. Coded by
+      <a href="https://github.com/Ahmed-let-front">Ahmed Yasser</a>.
     </footer>
   </body>
 </html>
