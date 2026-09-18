@@ -32,16 +32,26 @@ const renderOnScreen = (key) => {
   const regex = /[0-9]/;
   const lastEl = elements.calculatorScreen.lastElementChild;
   const lastText = lastEl?.textContent || "";
+  const arrRes = Array.from(
+    elements.calculatorScreen.children,
+    (el) => el.textContent,
+  );
   if (elements.operators.includes(key)) {
     if (elements.operators.includes(lastText)) {
       lastEl.textContent = key;
+      return;
+    }
+    if (arrRes.length >= 3) {
+      arrRes.pop();
+      equalOperation("=");
+      renderOnScreen(key);
       return;
     }
     const elText = `<span class="calculator__screen-text-operators">${key}</span>`;
     elements.calculatorScreen.insertAdjacentHTML("beforeend", elText);
     return;
   }
-  if (lastText.at(-1) === "." && key === ".") return;
+  if (lastText.includes(".") && key === ".") return;
   if (lastText === "0" && regex.test(key)) {
     lastEl.textContent = key;
     return;
@@ -65,11 +75,13 @@ const returnExp = () => {
     return el.textContent;
   });
   if (arrRes.length === 2) arrRes.push(arrRes[0]);
-  return arrRes.join("");
+  return arrRes;
 };
 const equalOperation = (key) => {
   if (key !== "=" && key !== "Enter") return;
-  const ast = parse(returnExp());
+  const res = returnExp();
+  if (res.length === 1) return;
+  const ast = parse(res.join(""));
   const result = evaluateExpression(ast);
   const finalRes = Number(result.toFixed(10));
   clearScreen();
