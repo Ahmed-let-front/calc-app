@@ -49,7 +49,7 @@
     font-size: 62.5%;
   }
   body {
-    @apply flex flex-col  min-h-screen items-center justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
+    @apply md:flex md:flex-col  min-h-screen md:items-center md:justify-center bg-navy-850 font-league-spartan font-bold transition-colors duration-300;
   }
 
   ::-webkit-scrollbar {
@@ -119,7 +119,7 @@
 
 @layer components {
   .calculator {
-    @apply flex  w-full max-w-[32.7rem] flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
+    @apply flex  w-full h-full flex-col px-[2.4rem] pt-[3rem] sm:max-w-[40rem] sm:px-[3rem] sm:py-[3rem] md:max-w-[46rem] lg:max-w-[54rem] lg:px-[3.2rem] lg:py-[3.2rem];
   }
 
   .calculator__header {
@@ -177,9 +177,6 @@
   }
   .key--del {
     @apply text-[1.4rem] tracking-[0.1rem] sm:text-[1.6rem] lg:text-[2rem];
-  }
-  .calculator[data-theme='1'] {
-    @apply bg-navy-850;
   }
   .calculator[data-theme='2'] {
     .calculator__logo,

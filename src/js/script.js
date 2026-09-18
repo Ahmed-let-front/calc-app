@@ -6,12 +6,12 @@ const elements = {
   theme: 0,
   themeToggle: document.querySelector('.theme-toggle'),
 };
-const storeThemeLocalStorage = (newVal) => {
+const storeThemeLocalStorage = newVal => {
   localStorage.setItem('theme', newVal.toString());
 };
 const delAnyInputCheked = () => {
   const inpts = document.querySelectorAll('input[name="theme"]');
-  inpts.forEach((el) => (el.checked = false));
+  inpts.forEach(el => (el.checked = false));
 };
 const getThemeLocalStorage = () => {
   const newTheme = localStorage.getItem('theme');
@@ -27,7 +27,7 @@ const setTheme = () => {
   if (elements.theme === lastTheme) return;
   elements.app.setAttribute('data-theme', elements.theme);
 };
-const ToggleTheme = (e) => {
+const ToggleTheme = e => {
   const targetEl = e.target;
   const theme = targetEl.value;
   const lastTheme = elements.app.getAttribute('data-theme');
@@ -35,11 +35,11 @@ const ToggleTheme = (e) => {
   storeThemeLocalStorage(theme);
   elements.app.setAttribute('data-theme', theme);
 };
-const renderOnScreen = (key) => {
+const renderOnScreen = key => {
   const regex = /[0-9]/;
   const lastEl = elements.calculatorScreen.lastElementChild;
   const lastText = lastEl?.textContent || '';
-  const arrRes = Array.from(elements.calculatorScreen.children, (el) => el.textContent);
+  const arrRes = Array.from(elements.calculatorScreen.children, el => el.textContent);
   if (elements.operators.includes(key)) {
     if (elements.operators.includes(lastText)) {
       lastEl.textContent = key;
@@ -68,20 +68,20 @@ const renderOnScreen = (key) => {
   }
 };
 const clearScreen = () => {
-  Array.from(elements.calculatorScreen.children).forEach((el) => {
+  Array.from(elements.calculatorScreen.children).forEach(el => {
     el.remove();
   });
   elements.calculatorScreen.innerHTML = `<span class="calculator__screen-text">0</span>`;
 };
 const returnExp = () => {
-  const arrRes = Array.from(elements.calculatorScreen.children, (el) => {
+  const arrRes = Array.from(elements.calculatorScreen.children, el => {
     if (el.textContent === 'x') el.textContent = '*';
     return el.textContent;
   });
   if (arrRes.length === 2) arrRes.push(arrRes[0]);
   return arrRes;
 };
-const equalOperation = (key) => {
+const equalOperation = key => {
   if (key !== '=' && key !== 'Enter') return;
   const res = returnExp();
   if (res.length === 1) return;
@@ -91,7 +91,7 @@ const equalOperation = (key) => {
   clearScreen();
   renderOnScreen(finalRes);
 };
-const delOperation = (key) => {
+const delOperation = key => {
   if (key !== 'del' && key !== 'Backspace') return;
   const nums = Array.from(elements.calculatorScreen.children);
   const lastEl = elements.calculatorScreen.lastElementChild;
@@ -102,7 +102,7 @@ const delOperation = (key) => {
   }
   lastEl.textContent = lastEl.textContent.slice(0, lastEl.textContent.length - 1);
 };
-const handleKeyDelegation = (e) => {
+const handleKeyDelegation = e => {
   const targetEl = e.target.closest('.key');
   if (!targetEl) return;
   const key = targetEl.dataset.num;
@@ -115,14 +115,14 @@ const handleKeyDelegation = (e) => {
   else renderOnScreen(key);
 };
 const handleDocumentClick = () => {
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', e => {
     handleKeyDelegation(e);
   });
 };
 const handleTheme = () => {
   elements.themeToggle.addEventListener('change', ToggleTheme);
 };
-const hoverOnEl = (key) => {
+const hoverOnEl = key => {
   if (key === 'Enter') key = '=';
   if (key === 'Backspace') key = 'del';
   const btn = document.querySelector(`[data-num="${key}"]`);
@@ -132,7 +132,7 @@ const hoverOnEl = (key) => {
   }, 200);
 };
 const handleKeyPress = () => {
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', e => {
     const key = e.key === '*' ? 'x' : e.key;
     const regex = /^([0-9.+\-\/x=]|Backspace|Enter)$/;
     if (!regex.test(key)) return;
