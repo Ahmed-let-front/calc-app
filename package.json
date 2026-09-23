@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "author": "ahmed-yasser",
   "scripts": {
     "start": "vite",
     "build": "vite build",
